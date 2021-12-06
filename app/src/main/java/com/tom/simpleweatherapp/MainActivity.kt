@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     }
 
+    // at first, it searches through the DB for data, if nothing is found then the API is called.
     private fun btnListener() {
         if (spinner.selectedItem == "Current location") {
             var city: String?
@@ -114,7 +115,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    // method to get the current temperature and weather conditions from API
     private fun getWeatherInfoFromApi(city: String, database: MyDatabase) {
         val retrofit = Retrofit.Builder()
             .baseUrl(BaseUrl)
@@ -193,5 +193,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     // setting the spinner to "Current location" when no item from the list is selected
     override fun onNothingSelected(parent: AdapterView<*>?) {
         parent?.setSelection(0)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Thread {
+            database.clearAllTables()
+        }.start()
+
+        database.close()
     }
 }
