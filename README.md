@@ -1,6 +1,6 @@
-# simple-weather-app
+# Simple Weather App
 
-Hi! Here is my simple weather app, and a few quick steps on how to use it:
+Hi! Here are few quick steps on how to use the application:
 
 1) Allow Location usage after installing the app. Otherwise it will crash on start :)
 2) Select the desired city from the dropdown menu, or just leave it on "Current location"
