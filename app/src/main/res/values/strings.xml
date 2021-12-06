@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Simple Weather App</string>
+    <string name="btn_show_weather">Show</string>
+    <string name="tv_title_current_location">Current Location</string>
+    <string name="tv_temperature_results">Temperature: %s °C.</string>
+    <string name="tv_weather_results">Weather: %s.</string>
 </resources>

@@ -1,11 +1,15 @@
 package com.tom.simpleweatherapp
 
+import android.location.Address
+import android.location.Geocoder
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.tom.simpleweatherapp.db.MyDatabase
+import java.util.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
@@ -44,6 +48,38 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         spinner.onItemSelectedListener = this
 
 
+        // trying to get the current location
+        // p.s. the app will crash if the location permission is not granted
+        getCurrentLocation()
+
+
+    }
+
+    private fun getCurrentLocation() {
+        var latitude: Double = 0.0
+        var longitude: Double = 0.0
+
+        try {
+            latitude =
+                locationManager?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)?.latitude!!
+            longitude =
+                locationManager?.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)?.longitude!!
+        } catch (ex: SecurityException) {
+            Log.d("myLocationTag", "No location available")
+        }
+
+        // setting Geocoder to display current city and country
+        // for those who don't know what latitude & longitude are
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val addresses: MutableList<Address> = geocoder.getFromLocation(latitude, longitude, 1)
+        val cityName = addresses[0].locality
+        val countryName = addresses[0].countryName
+
+        val stringBuilder = "$cityName, $countryName" +
+                " \n${latitude}:${longitude}"
+
+        currentLocation?.text = stringBuilder
+        currentCity = cityName
     }
 
     // clearing the results field when selecting another city
