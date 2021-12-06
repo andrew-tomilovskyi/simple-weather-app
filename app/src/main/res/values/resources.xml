@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cities_array">
+        <item>Current location</item>
+        <item>Washington</item>
+        <item>Johannesburg</item>
+        <item>London</item>
+        <item>Beijing</item>
+        <item>Tokyo</item>
+    </string-array>
+</resources>
